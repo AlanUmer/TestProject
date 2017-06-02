@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
-import App from './App';
+import setup from './src/setup';
 
-AppRegistry.registerComponent('RadioProject', () => App);
+AppRegistry.registerComponent('RadioProject', setup);

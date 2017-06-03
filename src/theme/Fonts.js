@@ -1,6 +1,4 @@
-import { Platform } from 'react-native';
 import Colors from './Colors';
-import Metrics from './Metrics';
 
 const type = {
   regular: 'TitilliumWeb-Regular',

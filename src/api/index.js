@@ -4,7 +4,6 @@ const Api = {
     token: '',
     userid: '',
   },
-  
   getParams(method, body) {
     if (this.setting.token === '' || this.setting.token === null || this.setting.token === undefined) {
       return {
@@ -15,7 +14,7 @@ const Api = {
     }
     return {
       method,
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.setting.token}` },
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${this.setting.token}` },
       body: JSON.stringify(body),
     };
   },

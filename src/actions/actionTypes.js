@@ -8,4 +8,5 @@ export default createTypes(`
   SET_LOCATIONS
   SET_DETAIL
   SET_RADIO_ID
+  SET_PLAYER_STATUS
 `);

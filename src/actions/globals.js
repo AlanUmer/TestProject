@@ -14,5 +14,8 @@ export const setDetail = detail =>
   ({ type: Types.SET_DETAIL, detail });
 export const setRadioId = radioId =>
   ({ type: Types.SET_RADIO_ID, radioId });
+export const setPlayerStatus = playerStatus =>
+  ({ type: Types.SET_PLAYER_STATUS, playerStatus });
+
 
 

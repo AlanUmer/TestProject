@@ -3,27 +3,18 @@ import { Text, View, DeviceEventEmitter, TouchableOpacity, ActivityIndicator } f
 import NavigationBar from 'react-native-navbar';
 import { connect } from 'react-redux';
 import { SliderVolumeController } from 'react-native-volume-controller';
-import { setDetail } from '@actions/globals';
+import { setDetail, setPlayerStatus } from '@actions/globals';
 
 import { Styles, Images, Metrics, Colors } from '@theme/';
 import CommonWidgets from '@components/CommonWidgets';
 import Api from '@api';
 
 import Utils from '@src/utils';
-
+import Global from '@src/global';
 // import ModalDropdown from 'react-native-modal-dropdown';
 // const DEMO_OPTIONS_1 = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6', 'option 7', 'option 8', 'option 9'];
 // <ModalDropdown style={{ flex: 1, top: 32, left: 8 }} options={DEMO_OPTIONS_1} />
 
-const PLAYING = 'PLAYING';
-const STREAMING = 'STREAMING';
-const PAUSED = 'PAUSED';
-const STOPPED = 'STOPPED';
-const ERROR = 'ERROR';
-const METADATA_UPDATED = 'METADATA_UPDATED';
-const BUFFERING = 'BUFFERING';
-const START_PREPARING = 'START_PREPARING'; // Android only
-const BUFFERING_START = 'BUFFERING_START'; // Android only
 
 import { ReactNativeAudioStreaming } from 'react-native-audio-streaming';
 
@@ -32,7 +23,7 @@ class Player extends Component {
     super(props);
     this._onPress = this._onPress.bind(this);
     this.state = {
-      status: STOPPED,
+      status: Global.STOPPED,
       song: '',
     };
   }
@@ -43,14 +34,15 @@ class Player extends Component {
   componentDidMount() {
     this.subscription = DeviceEventEmitter.addListener(
       'AudioBridgeEvent', (evt) => {
-        console.log('event', evt);
-        if (evt.status === METADATA_UPDATED && evt.key === 'StreamTitle') {
-          this.setState({ song: evt.value });
-          console.log('state', this.state);
-        } else if (evt.status !== METADATA_UPDATED) {
-          this.setState(evt);
-          console.log('state', this.state);
-        }
+        this.props.setPlayerStatus(evt.status);
+        // console.log('event', evt);
+        // if (evt.status === Global.METADATA_UPDATED && evt.key === 'StreamTitle') {
+        //   this.setState({ song: evt.value });
+        //   console.log('state', this.state);
+        // } else if (evt.status !== Global.METADATA_UPDATED) {
+        //   this.setState(evt);
+        //   console.log('state', this.state);
+        // }
       },
     );
 
@@ -59,19 +51,19 @@ class Player extends Component {
     });
   }
   _onPress() {
-    switch (this.state.status) {
-      case PLAYING:
-      case STREAMING:
+    switch (this.props.globals.playerStatus) {
+      case Global.PLAYING:
+      case Global.STREAMING:
         ReactNativeAudioStreaming.pause();
         break;
-      case PAUSED:
+      case Global.PAUSED:
         ReactNativeAudioStreaming.resume();
         break;
-      case STOPPED:
-      case ERROR:
+      case Global.STOPPED:
+      case Global.ERROR:
         ReactNativeAudioStreaming.play('http://104.167.3.56:8000/40principalesec', { showIniOSMediaCenter: true, showInAndroidNotifications: true });
         break;
-      case BUFFERING:
+      case Global.BUFFERING:
         ReactNativeAudioStreaming.stop();
         break;
     }
@@ -82,40 +74,24 @@ class Player extends Component {
     this.props.setDetail(detail);
     ReactNativeAudioStreaming.play('http://104.167.3.56:8000/40principalesec', { showIniOSMediaCenter: true, showInAndroidNotifications: true });
   }
-  renderHeader() {
-    return null;
-  }
-  renderFooter() {
-    if (!this.state.loading) return null;
-    return (
-      <ActivityIndicator size={'large'} />
-    );
-  }
-  handleRefresh() {
-  }
-  handleLoadMore() {
-    if (!this.state.loading) {
-      console.log('load more.....');
-    }
-  }
   onUserPressed() {
     this.props.navigation.goBack();
   }
   render() {
     let icon = null;
-    switch (this.state.status) {
-      case PLAYING:
-      case STREAMING:
+    switch (this.props.globals.playerStatus) {
+      case Global.PLAYING:
+      case Global.STREAMING:
         icon = <Text>॥</Text>;
         break;
-      case PAUSED:
-      case STOPPED:
-      case ERROR:
+      case Global.PAUSED:
+      case Global.STOPPED:
+      case Global.ERROR:
         icon = <Text>▸</Text>;
         break;
-      case BUFFERING:
-      case BUFFERING_START:
-      case START_PREPARING:
+      case Global.BUFFERING:
+      case Global.BUFFERING_START:
+      case Global.START_PREPARING:
         icon = (<ActivityIndicator
           animating
           style={{ height: 80 }}
@@ -132,14 +108,14 @@ class Player extends Component {
           tintColor={Colors.brandSecondary}
           rightButton={CommonWidgets.renderNavBarRightButton(() => this.props.navigation.goBack())}
           leftButton={CommonWidgets.renderNavBarLeftButton()} />
-        <View style={[Styles.listContainer, { paddingTop: Metrics.defaultPadding, backgroundColor: 'red' }]}>
+        <View style={[Styles.listContainer, { paddingTop: Metrics.defaultPadding, backgroundColor: 'darkgrey' }]}>
           <TouchableOpacity onPress={this._onPress}>
-            <Text>ddddd</Text>
+            <Text style={{ fontSize: 40, color: 'white', alignSelf: 'center' }}>Player Button</Text>
           </TouchableOpacity>
+          {icon}
           <View style={[Styles.center, { flex: 1 }]}>
             <SliderVolumeController />
           </View>
-
         </View>
       </View>
     );
@@ -150,6 +126,7 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     setDetail: detail => dispatch(setDetail(detail)),
+    setPlayerStatus: playerStatus => dispatch(setPlayerStatus(playerStatus)),
   };
 }
 function mapStateToProps(state) {

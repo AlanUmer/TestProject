@@ -69,25 +69,25 @@ const CommonWidgets = {
         onPress={onPress}>
         <View style={{ padding: Metrics.defaultPadding / 2, paddingBottom: 0, flexDirection: 'row', backgroundColor: Colors.itemColor }}>
           <Image
-            source={{ uri: item.logo, width: 100, height: 76 }}
+            source={{ uri: item.logo, width: 80, height: 65 }}
           />
           <View>
             <Text style={{ padding: 5, fontSize: 15, paddingBottom: 0, color: '#ffffff', margin: 0 }}>
               {item.location}
             </Text>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={{ padding: 5, fontSize: 9, paddingBottom: 0, color: '#ffffff', margin: 0 }}>
+              <Text style={{ paddingLeft: 5, fontSize: 9, paddingBottom: 5, color: '#ffffff', margin: 0 }}>
                 Frecuencla:
               </Text>
-              <Text style={{ padding: 5, fontSize: 9, paddingBottom: 0, color: '#ffffff', margin: 0 }}>105.3 FM</Text>
+              <Text style={{ paddingLeft: 5, fontSize: 9, paddingBottom: 5, color: '#ffffff', margin: 0 }}>105.3 FM</Text>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={{ padding: 5, fontSize: 9, paddingBottom: 0, color: '#ffffff', margin: 0 }}>Genero:</Text>
-              <Text style={{ padding: 5, fontSize: 9, paddingBottom: 0, color: '#ffffff', marginLeft: 17 }}>Religiosa</Text>
+              <Text style={{ paddingLeft: 5, fontSize: 9, paddingBottom: 5, color: '#ffffff', margin: 0 }}>Genero:</Text>
+              <Text style={{ paddingLeft: 5, fontSize: 9, paddingBottom: 5, color: '#ffffff', marginLeft: 17 }}>Religiosa</Text>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={{ padding: 5, fontSize: 9, paddingBottom: 0, color: '#ffffff', margin: 0 }}>Genero:</Text>
-              <Text style={{ padding: 5, fontSize: 9, paddingBottom: 0, color: '#ffffff', margin: 0 }}>Santo Domingo</Text>
+              <Text style={{ paddingLeft: 5, fontSize: 9, paddingBottom: 5, color: '#ffffff', margin: 0 }}>Genero:</Text>
+              <Text style={{ paddingLeft: 5, fontSize: 9, paddingBottom: 5, color: '#ffffff', marginLeft: 16 }}>Santo Domingo</Text>
             </View>
           </View>
         </View>

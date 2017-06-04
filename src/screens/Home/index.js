@@ -44,7 +44,6 @@ class Home extends Component {
     this.props.navigation.navigate('player', {id: item.id});
   }
   render() {
-    console.log('home', this.props.globals.radios);
     return (
       <View style={{ flex: 1 }} >
         {CommonWidgets.renderStatusBar(Colors.headerColor)}

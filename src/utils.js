@@ -9,9 +9,9 @@ const Utils = {
   },
   getFullURL(MODE, url) {
     if (MODE === 'DEVELOPMENT') {
-      return `http://192.168.0.33:3000${url}`;
+      return `http://192.0.0.33:3000${url}`;
     }
-    return `https://www.an10na.info${url}`;
+    return `https://www.info${url}`;
   },
 };
 

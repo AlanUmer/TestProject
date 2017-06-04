@@ -3,7 +3,9 @@ import { Image, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 
 import { Styles, Images, Metrics, Colors } from '@theme/';
+import { setRadios } from '@actions/globals';
 import CommonWidgets from '@components/CommonWidgets';
+import Api from '@api';
 
 import Utils from '@src/utils';
 
@@ -12,10 +14,17 @@ let netStateTimer;
 class Splash extends Component {
 
   componentDidMount() {
-    netStateTimer = setInterval(this.onTimer.bind(this), 1000);
+    this.loadingData();
+    netStateTimer = setInterval(this.onTimer.bind(this), 2000);
   }
   componentWillUnmount() {
     clearInterval(netStateTimer);
+  }
+  async loadingData() {
+    // const topics = await Api.getInfo();
+    const radios = await Api.getNameSearch('d');
+    this.props.setRadios(radios);
+    // console.log('result', topics);
   }
   onTimer() {
     if (this.props.globals.networkState) {
@@ -46,6 +55,7 @@ class Splash extends Component {
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    setRadios: radios => dispatch(setRadios(radios)),
   };
 }
 function mapStateToProps(state) {

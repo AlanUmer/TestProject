@@ -1,25 +1,43 @@
-import { Alert } from 'react-native';
+import CONFIG from '@src/config';
+
 const Api = {
-  setting: {
-    token: '',
-    userid: '',
-  },
-  getParams(method, body) {
-    if (this.setting.token === '' || this.setting.token === null || this.setting.token === undefined) {
-      return {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      };
-    }
-    return {
-      method,
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${this.setting.token}` },
-      body: JSON.stringify(body),
-    };
-  },
   checkStatus(response) {
     return response;
+  },
+  async getInfo() {
+    try {
+      const res = await fetch(`${CONFIG.SERVER}info`);
+      const ret = await this.checkStatus(res.json());
+      return ret;
+    } catch (error) { console.log(error); return null; }
+  },
+  async getNameSearch(name) {
+    try {
+      const res = await fetch(`${CONFIG.SERVER}search?name=${name}`);
+      const ret = await this.checkStatus(res.json());
+      return ret;
+    } catch (error) { console.log(error); return null; }
+  },
+  async getGenreSearch(genre) {
+    try {
+      const res = await fetch(`${CONFIG.SERVER}search?genre_id=${genre}`);
+      const ret = await this.checkStatus(res.json());
+      return ret;
+    } catch (error) { console.log(error); return null; }
+  },
+  async getLocationSearch(location) {
+    try {
+      const res = await fetch(`${CONFIG.SERVER}search?location=${location}`);
+      const ret = await this.checkStatus(res.json());
+      return ret;
+    } catch (error) { console.log(error); return null; }
+  },
+  async getDetail(id) {
+    try {
+      const res = await fetch(`${CONFIG.SERVER}${id}`);
+      const ret = await this.checkStatus(res.json());
+      return ret;
+    } catch (error) { console.log(error); return null; }
   },
 
 };

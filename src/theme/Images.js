@@ -1,6 +1,7 @@
 const images = {
   bkgSplash: require('@assets/images/bkgsplash.png'),
-  imgLogo: require('@assets/images/imglogo.png'),
+  logo: require('@assets/images/logo.png'),
+  search: require('@assets/images/search.png'),
 };
 
 export default images;

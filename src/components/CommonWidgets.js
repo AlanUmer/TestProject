@@ -44,7 +44,7 @@ const CommonWidgets = {
   renderNavBarLeftButton() {
     return (
       <Image
-        style={{ width: Metrics.screenWidth * 0.6, height: 40 }}
+        style={{ width: Metrics.screenWidth * 0.7, height: 40, tintColor: 'white' }}
         resizeMode={'stretch'}
         source={Images.logo} />
     );

@@ -2,19 +2,14 @@ import React, { Component } from 'react';
 import { Image, Text, View, TextInput, FlatList, ActivityIndicator } from 'react-native';
 import NavigationBar from 'react-native-navbar';
 import { connect } from 'react-redux';
-import { CheckBox } from 'react-native-elements'
-
-
-import { Styles, Images, Metrics, Colors } from '@theme/';
+import { SearchBar, CheckBox } from 'react-native-elements';
+import { Styles, Images, Fonts, Metrics, Colors } from '@theme/';
 import CommonWidgets from '@components/CommonWidgets';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Utils from '@src/utils';
-
-
-// import ModalDropdown from 'react-native-modal-dropdown';
-// const DEMO_OPTIONS_1 = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6', 'option 7', 'option 8', 'option 9'];
-// <ModalDropdown style={{ flex: 1, top: 32, left: 8 }} options={DEMO_OPTIONS_1} />
+import ModalDropdown from 'react-native-modal-dropdown';
+const DEMO_OPTIONS_1 = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6', 'option 7', 'option 8', 'option 9'];
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +39,7 @@ class Home extends Component {
     }
   }
   onUserPressed(item) {
-    this.props.navigation.navigate('player', {id: item.id});
+    this.props.navigation.navigate('player', { id: item.id });
   }
   render() {
     return (
@@ -54,39 +49,36 @@ class Home extends Component {
           statusBar={{ style: 'light-content' }}
           style={Styles.navBarStyle}
           tintColor={Colors.brandSecondary}
-          leftButton={CommonWidgets.renderNavBarLeftButton()} 
-          rightButton={CommonWidgets.renderNavBarRightButton(() => this.props.navigation.goBack())}/>
+          leftButton={CommonWidgets.renderNavBarLeftButton()}
+          rightButton={CommonWidgets.renderNavBarRightButton(() => this.props.navigation.goBack())} />
         <View style={[Styles.listContainer]}>
-          <View style={{  width: Metrics.screenWidth, height: 100, backgroundColor: '#1f1f1f'}}>
-            <View style={{flexDirection: 'row'}}>
-              <TextInput
-                style={{height: 40, flex: 1, borderColor: 'white', borderWidth: 1}}
-                onChangeText={(text) => this.setState({text})}
-                value={this.state.text}
-                placeholder="Type Here"              
-              />
-              <Icon name="rocket" size={30} color="#900" />
+          <View style={{ width: Metrics.screenWidth, height: 100, backgroundColor: '#1f1f1f' }}>
+            <View style={{ flexDirection: 'row' }}>
+              <SearchBar
+                containerStyle={{ flex: 1, backgroundColor: '#1f1f1f', borderTopWidth: 0, borderBottomWidth: 0 }}
+                inputStyle={[{ backgroundColor: '#9f9f9f', color: 'white' }]}
+                placeholder="Type Here..." />
             </View>
-            <View style={{flexDirection: 'row'}}>
-              <CheckBox
-                center
-                title='Click Here'
-                checkedIcon='dot-circle-o'
-                uncheckedIcon='circle-o'
-                checked={this.state.checked}
-              />
-              <CheckBox
-                center
-                title='Click Here'
-                checkedIcon='dot-circle-o'
-                uncheckedIcon='circle-o'
-                checked={this.state.checked}
-              />
+            <View style={{ flexDirection: 'row' }}>
+              <ModalDropdown
+                style={{ flex: 1, top: 10, padding: 10, left: 0 }}
+                textStyle={{ color: 'white' }}
+                showsVerticalScrollIndicator
+                defaultValue={'Select Location'}
+                renderRow={( item ) => CommonWidgets.renderMenuListItem(item)}
+                options={DEMO_OPTIONS_1} />
+              <ModalDropdown
+                style={{ flex: 1, top: 10, padding: 10, left: 0 }}
+                textStyle={{ color: 'white' }}
+                showsVerticalScrollIndicator
+                defaultValue={'Select Genre'}
+                renderRow={(item) => CommonWidgets.renderMenuListItem(item)}
+                options={DEMO_OPTIONS_1} />
             </View>
           </View>
 
           <Image
-            style={{ flex: 1,  width: null, height: null, paddingTop: 15 }}
+            style={{ flex: 1, width: null, height: null, paddingTop: 15 }}
             resizeMode={'stretch'}
             source={Images.background}>
             <FlatList

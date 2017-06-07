@@ -83,6 +83,14 @@ const Styles = {
     backgroundColor: Colors.itemColor,
     marginBottom: 5,
   },
+  menuItemContainer: {
+    width: Metrics.screenWidth / 2 - 20,
+    borderBottomWidth: 0.5,
+    borderBottomColor: Colors.borderPrimary,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.itemColor,
+  },
   bigAppleImage: {
     width: Metrics.appleSize,
     height: Metrics.appleSize,

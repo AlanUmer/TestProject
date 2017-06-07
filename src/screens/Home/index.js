@@ -52,23 +52,24 @@ class Home extends Component {
           leftButton={CommonWidgets.renderNavBarLeftButton()}
           rightButton={CommonWidgets.renderNavBarRightButton(() => this.props.navigation.goBack())} />
         <View style={[Styles.listContainer]}>
-          <View style={{ width: Metrics.screenWidth, height: 100, backgroundColor: '#1f1f1f' }}>
+          <View style={{ width: Metrics.screenWidth, justifyContent: 'center', alignItems: 'center', height: 100, backgroundColor: '#1f1f1f' }}>
             <View style={{ flexDirection: 'row' }}>
               <SearchBar
                 containerStyle={{ flex: 1, backgroundColor: '#1f1f1f', borderTopWidth: 0, borderBottomWidth: 0 }}
                 inputStyle={[{ backgroundColor: '#9f9f9f', color: 'white' }]}
                 placeholder="Type Here..." />
+              <Icon name="search" size={25} color="white" style={{ marginTop: 15 }} />
             </View>
             <View style={{ flexDirection: 'row' }}>
               <ModalDropdown
-                style={{ flex: 1, top: 10, padding: 10, paddingLeft: 30, paddingRight: 30, left: 0 }}
+                style={{ flex: 1, top: 5, paddingLeft: 30, paddingRight: 30, left: 0 }}
                 textStyle={{ color: 'white' }}
                 showsVerticalScrollIndicator
                 defaultValue={'Select Location'}
                 renderRow={( item ) => CommonWidgets.renderMenuListItem(item)}
                 options={DEMO_OPTIONS_1} />
               <ModalDropdown
-                style={{ flex: 1, top: 10, padding: 10, left: 0 }}
+                style={{ flex: 1, top: 5, paddingLeft: 30, paddingRight: 30, left: 0 }}
                 textStyle={{ color: 'white' }}
                 showsVerticalScrollIndicator
                 defaultValue={'Select Genre'}

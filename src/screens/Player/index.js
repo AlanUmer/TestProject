@@ -61,7 +61,7 @@ class Player extends Component {
         break;
       case Global.STOPPED:
       case Global.ERROR:
-        ReactNativeAudioStreaming.play('http://104.167.3.56:8000/40principalesec', { showIniOSMediaCenter: true, showInAndroidNotifications: true });
+        ReactNativeAudioStreaming.play('http://lacavewebradio.chickenkiller.com:8000/stream.mp3', { showIniOSMediaCenter: true, showInAndroidNotifications: true });
         break;
       case Global.BUFFERING:
         ReactNativeAudioStreaming.stop();
@@ -72,7 +72,7 @@ class Player extends Component {
   async loadingDetailData(id) {
     const detail = await Api.getDetail(id);
     this.props.setDetail(detail);
-    ReactNativeAudioStreaming.play('http://104.167.3.56:8000/40principalesec', { showIniOSMediaCenter: true, showInAndroidNotifications: true });
+    ReactNativeAudioStreaming.play('http://lacavewebradio.chickenkiller.com:8000/stream.mp3', { showIniOSMediaCenter: true, showInAndroidNotifications: true });
   }
   onUserPressed() {
     this.props.navigation.goBack();
@@ -127,24 +127,24 @@ class Player extends Component {
             resizeMode={'stretch'}
             source={Images.background}>
 
-            <View style={{ flex: 1, backgroundColor: '#151515' }}>
+            <View style={{ flex: 1, padding: 30, backgroundColor: '#151515' }}>
               <Text style={{ fontSize: 15, color: 'white' }}>Ellge Localldad</Text>
               <ModalDropdown
-                style={{ top: 10, padding: 10, left: 0 }}
+                style={{ top: 10, left: 0 }}
                 textStyle={{ color: 'white' }}
                 showsVerticalScrollIndicator
                 defaultValue={'Select Items'}
                 renderRow={item => CommonWidgets.renderMenuListItem(item)}
                 options={DEMO_OPTIONS_1} />
-              <View style={{ alignItems: 'center', borderBottomWidth: 1, borderColor: 'white' }}>
+              <View style={{ alignItems: 'center', borderBottomWidth: 0.5, marginTop: 20, borderColor: 'white' }}>
                 <Text style={{ fontSize: 18, color: 'white' }}>Ellge Localldad</Text>
                 <Image
                   style={{ width: 120, height: 90, paddingTop: 15, margin: 10 }}
                   resizeMode={'stretch'}
-                  source={Images.background} />
+                  source={Images.test} />
               </View>
-              <View style={{ padding: 30 }}>
-                <Text style={{ color: 'white' }}>Titleafasdfasdfasdfasdasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdff</Text>
+              <View style={{ }}>
+                <Text style={{ color: 'white', marginTop: 30 }}>Titleafasdfasdfasdfasdasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdff</Text>
               </View>
             </View>
 

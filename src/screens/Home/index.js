@@ -42,6 +42,7 @@ class Home extends Component {
     this.props.navigation.navigate('player', { id: item.id });
   }
   render() {
+    console.log(this.props.globals.radios);
     return (
       <View style={{ flex: 1 }} >
         {CommonWidgets.renderStatusBar(Colors.headerColor)}
@@ -67,14 +68,14 @@ class Home extends Component {
                 showsVerticalScrollIndicator
                 defaultValue={'Select Location'}
                 renderRow={( item ) => CommonWidgets.renderMenuListItem(item)}
-                options={DEMO_OPTIONS_1} />
+                options={this.props.globals.locations} />
               <ModalDropdown
                 style={{ flex: 1, top: 5, paddingLeft: 30, paddingRight: 30, left: 0 }}
                 textStyle={{ color: 'white' }}
                 showsVerticalScrollIndicator
                 defaultValue={'Select Genre'}
                 renderRow={(item) => CommonWidgets.renderMenuListItem(item)}
-                options={DEMO_OPTIONS_1} />
+                options={this.props.globals.genres} />
             </View>
           </View>
 

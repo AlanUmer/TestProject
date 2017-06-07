@@ -31,7 +31,7 @@ const setGenres = (state, action) => ({
 });
 const setLocations = (state, action) => ({
   ...state,
-  genres: action.locations,
+  locations: action.locations,
 });
 const setDetail = (state, action) => ({
   ...state,

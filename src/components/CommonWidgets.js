@@ -98,14 +98,14 @@ const CommonWidgets = {
           />
           <View>
             <Text style={{ padding: 5, fontSize: 15, paddingBottom: 0, color: '#ffffff', margin: 0 }}>
-              {item.location}
+              {item.name}
             </Text>
             <View style={{ flexDirection: 'row' }}>
               <Text style={{ width: Metrics.screenWidth * 0.2, paddingLeft: 10, fontSize: 9,  color: '#ffffff'}}>
                 Frecuencla
               </Text>
               <Text style={{ width: Metrics.screenWidth * 0.3, paddingLeft: 10, fontSize: 9,  color: '#ffffff'}}>
-                105.3 FM
+                {item.frequency}
               </Text>
             </View>
             <View style={{ flexDirection: 'row' }}>
@@ -113,7 +113,7 @@ const CommonWidgets = {
                 Localidad
               </Text>
               <Text style={{ width: Metrics.screenWidth * 0.3, paddingLeft: 10, fontSize: 9,  color: '#ffffff'}}>
-                SSSfajsfjaklsdjflaskjdf
+                {item.location}
               </Text>
             </View>
             <View style={{ flexDirection: 'row' }}>

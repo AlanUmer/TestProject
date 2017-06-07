@@ -7,7 +7,7 @@ export const setSpinnerVisible = spinnerVisible =>
 export const setRadios = radios =>
   ({ type: Types.SET_RADIOS, radios });
 export const setLocations = locations =>
-  ({ type: Types.SET_LOCATION, locations });
+  ({ type: Types.SET_LOCATIONS, locations });
 export const setGenres = genres =>
   ({ type: Types.SET_GENRES, genres });
 export const setDetail = detail =>

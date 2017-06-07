@@ -4,6 +4,8 @@ const images = {
   search: require('@assets/images/search.png'),
   close: require('@assets/images/close.png'),
   background: require('@assets/images/background.png'),
+  play: require('@assets/images/play.png'),
+  stop: require('@assets/images/stop.png'),
 };
 
 export default images;

@@ -61,7 +61,7 @@ class Home extends Component {
             </View>
             <View style={{ flexDirection: 'row' }}>
               <ModalDropdown
-                style={{ flex: 1, top: 10, padding: 10, left: 0 }}
+                style={{ flex: 1, top: 10, padding: 10, paddingLeft: 30, paddingRight: 30, left: 0 }}
                 textStyle={{ color: 'white' }}
                 showsVerticalScrollIndicator
                 defaultValue={'Select Location'}

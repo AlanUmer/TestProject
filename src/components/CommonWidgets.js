@@ -62,6 +62,15 @@ const CommonWidgets = {
       </TouchableOpacity>
     );
   },
+  renderNavBarRightButtonSearch(onPress) {
+    return (
+      <TouchableOpacity
+        style={{ paddingBottom: 8 }}
+        onPress={onPress} >
+        <Icon name="search" size={25} color="white" />
+      </TouchableOpacity>
+    );
+  },
   renderMenuListItem(item) {
     return (
       <TouchableOpacity

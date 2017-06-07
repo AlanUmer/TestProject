@@ -78,24 +78,30 @@ class Player extends Component {
     this.props.navigation.goBack();
   }
   render() {
-    let icon = null;
+    let playerButton = null;
     switch (this.props.globals.playerStatus) {
       case Global.PLAYING:
       case Global.STREAMING:
-        icon = <Text>॥</Text>;
+        playerButton = <Image
+          style={{ width: 100, height: 35 }}
+          resizeMode={'stretch'}
+          source={Images.stop} />;
         break;
       case Global.PAUSED:
       case Global.STOPPED:
       case Global.ERROR:
-        icon = <Text>▸</Text>;
+        playerButton = <Image
+          style={{ width: 100, height: 35 }}
+          resizeMode={'stretch'}
+          source={Images.play} />;
         break;
       case Global.BUFFERING:
       case Global.BUFFERING_START:
       case Global.START_PREPARING:
-        icon = (<ActivityIndicator
+        playerButton = (<ActivityIndicator
           animating
-          style={{ height: 80 }}
-          size="large"
+          style={{ height: 35 }}
+          size="small"
                 />);
         break;
     }
@@ -106,38 +112,44 @@ class Player extends Component {
           statusBar={{ style: 'light-content' }}
           style={Styles.navBarStyle}
           tintColor={Colors.brandSecondary}
-          rightButton={CommonWidgets.renderNavBarRightButton(() => this.props.navigation.goBack())}
+          rightButton={CommonWidgets.renderNavBarRightButtonSearch(() => this.props.navigation.goBack())}
           leftButton={CommonWidgets.renderNavBarLeftButton()} />
-         <View style={[Styles.listContainer]}>
-          <View style={{  width: Metrics.screenWidth, height: 100, backgroundColor: '#1f1f1f'}}>
+        <View style={[Styles.listContainer]}>
+          <View style={{ width: Metrics.screenWidth, height: 100, alignItems: 'center', backgroundColor: '#181818' }}>
             <SliderVolumeController />
             <TouchableOpacity onPress={this._onPress}>
-              <Text style={{ fontSize: 40, color: 'white', alignSelf: 'center' }}>Player Button</Text>
-            </TouchableOpacity>  
+              {playerButton}
+            </TouchableOpacity>
+            <Text style={{ fontSize: 10, color: 'white' }}>Ellge Localldad</Text>
           </View>
           <Image
-            style={{ flex: 1,  width: null, height: null, padding: 30 }}
+            style={{ flex: 1, width: null, height: null, padding: 30 }}
             resizeMode={'stretch'}
             source={Images.background}>
-            
-            <View style={{ flex: 1, backgroundColor: '#1f1f1f' }}>
-              <Text>Title</Text>
-              <ModalDropdown style={{ flex: 1, top: 32, left: 8 }} options={DEMO_OPTIONS_1} />
-              <View>
-                <Text>Title</Text>
+
+            <View style={{ flex: 1, backgroundColor: '#151515' }}>
+              <Text style={{ fontSize: 15, color: 'white' }}>Ellge Localldad</Text>
+              <ModalDropdown
+                style={{ top: 10, padding: 10, left: 0 }}
+                textStyle={{ color: 'white' }}
+                showsVerticalScrollIndicator
+                defaultValue={'Select Items'}
+                renderRow={item => CommonWidgets.renderMenuListItem(item)}
+                options={DEMO_OPTIONS_1} />
+              <View style={{ alignItems: 'center', borderBottomWidth: 1, borderColor: 'white' }}>
+                <Text style={{ fontSize: 18, color: 'white' }}>Ellge Localldad</Text>
                 <Image
-                  style={{ width: 100, height: 70, paddingTop: 15 }}
+                  style={{ width: 120, height: 90, paddingTop: 15, margin: 10 }}
                   resizeMode={'stretch'}
                   source={Images.background} />
               </View>
-              <View>
-                <Text>Titleafasdfasdfasdfasdf</Text>
-                
+              <View style={{ padding: 30 }}>
+                <Text style={{ color: 'white' }}>Titleafasdfasdfasdfasdasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdff</Text>
               </View>
             </View>
-            
+
           </Image>
-          
+
         </View>
       </View>
     );

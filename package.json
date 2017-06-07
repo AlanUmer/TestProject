@@ -11,6 +11,7 @@
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.2",
     "react-native-audio-streaming": "^2.3.2",
+    "react-native-elements": "^0.12.2",
     "react-native-i18n": "^1.0.0",
     "react-native-modal-dropdown": "^0.4.3",
     "react-native-navbar": "^1.7.1",

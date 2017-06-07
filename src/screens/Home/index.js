@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { Image, Text, View, FlatList, ActivityIndicator } from 'react-native';
+import { Image, Text, View, TextInput, FlatList, ActivityIndicator } from 'react-native';
 import NavigationBar from 'react-native-navbar';
 import { connect } from 'react-redux';
+import { CheckBox } from 'react-native-elements'
+
 
 import { Styles, Images, Metrics, Colors } from '@theme/';
 import CommonWidgets from '@components/CommonWidgets';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Utils from '@src/utils';
 
@@ -51,20 +54,53 @@ class Home extends Component {
           statusBar={{ style: 'light-content' }}
           style={Styles.navBarStyle}
           tintColor={Colors.brandSecondary}
-          rightButton={CommonWidgets.renderNavBarRightButton(() => this.props.navigation.goBack())}
-          leftButton={CommonWidgets.renderNavBarLeftButton()} />
-        <View style={[Styles.listContainer, { paddingTop: Metrics.defaultPadding }]}>
-          <FlatList
-            keyboardShouldPersistTaps={'always'}
-            data={this.props.globals.radios}
-            renderItem={({ item }) => CommonWidgets.renderReviewListItem(item, () => this.onUserPressed(item))}
-            keyExtractor={item => item.id}
-            ListHeaderComponent={this.renderHeader.bind(this)}
-            ListFooterComponent={this.renderFooter.bind(this)}
-            onRefresh={this.handleRefresh.bind(this)}
-            refreshing={this.state.refreshing}
-            onEndReached={this.handleLoadMore.bind(this)}
-            onEndReachedThreshold={50} />
+          leftButton={CommonWidgets.renderNavBarLeftButton()} 
+          rightButton={CommonWidgets.renderNavBarRightButton(() => this.props.navigation.goBack())}/>
+        <View style={[Styles.listContainer]}>
+          <View style={{  width: Metrics.screenWidth, height: 100, backgroundColor: '#1f1f1f'}}>
+            <View style={{flexDirection: 'row'}}>
+              <TextInput
+                style={{height: 40, flex: 1, borderColor: 'white', borderWidth: 1}}
+                onChangeText={(text) => this.setState({text})}
+                value={this.state.text}
+                placeholder="Type Here"              
+              />
+              <Icon name="rocket" size={30} color="#900" />
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <CheckBox
+                center
+                title='Click Here'
+                checkedIcon='dot-circle-o'
+                uncheckedIcon='circle-o'
+                checked={this.state.checked}
+              />
+              <CheckBox
+                center
+                title='Click Here'
+                checkedIcon='dot-circle-o'
+                uncheckedIcon='circle-o'
+                checked={this.state.checked}
+              />
+            </View>
+          </View>
+
+          <Image
+            style={{ flex: 1,  width: null, height: null, paddingTop: 15 }}
+            resizeMode={'stretch'}
+            source={Images.background}>
+            <FlatList
+              keyboardShouldPersistTaps={'always'}
+              data={this.props.globals.radios}
+              renderItem={({ item }) => CommonWidgets.renderReviewListItem(item, () => this.onUserPressed(item))}
+              keyExtractor={item => item.id}
+              ListHeaderComponent={this.renderHeader.bind(this)}
+              ListFooterComponent={this.renderFooter.bind(this)}
+              onRefresh={this.handleRefresh.bind(this)}
+              refreshing={this.state.refreshing}
+              onEndReached={this.handleLoadMore.bind(this)}
+              onEndReachedThreshold={50} />
+          </Image>
         </View>
       </View>
     );

@@ -76,12 +76,11 @@ const Styles = {
   },
   listItemContainer: {
     width: Metrics.listItemWidth,
-    padding: 5,
     borderBottomWidth: 0.5,
     borderBottomColor: Colors.borderPrimary,
     alignSelf: 'center',
     justifyContent: 'center',
-    backgroundColor: Colors.backgroundSecondary,
+    backgroundColor: Colors.itemColor,
     marginBottom: 5,
   },
   bigAppleImage: {

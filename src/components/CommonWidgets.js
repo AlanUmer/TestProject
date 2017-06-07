@@ -52,12 +52,12 @@ const CommonWidgets = {
   renderNavBarRightButton(onPress) {
     return (
       <TouchableOpacity
-        style={{ paddingBottom: 5 }}
+        style={{ paddingBottom: 0 }}
         onPress={onPress} >
         <Image
           style={{ width: 35, height: 35 }}
           resizeMode={'stretch'}
-          source={Images.search} />
+          source={Images.close} />
       </TouchableOpacity>
     );
   },
@@ -76,18 +76,28 @@ const CommonWidgets = {
               {item.location}
             </Text>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={{ paddingLeft: 5, fontSize: 9, paddingBottom: 5, color: '#ffffff', margin: 0 }}>
-                Frecuencla:
+              <Text style={{ width: Metrics.screenWidth * 0.2, paddingLeft: 10, fontSize: 9,  color: '#ffffff'}}>
+                Frecuencla
               </Text>
-              <Text style={{ paddingLeft: 5, fontSize: 9, paddingBottom: 5, color: '#ffffff', margin: 0 }}>105.3 FM</Text>
+              <Text style={{ width: Metrics.screenWidth * 0.3, paddingLeft: 10, fontSize: 9,  color: '#ffffff'}}>
+                105.3 FM
+              </Text>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={{ paddingLeft: 5, fontSize: 9, paddingBottom: 5, color: '#ffffff', margin: 0 }}>Genero:</Text>
-              <Text style={{ paddingLeft: 5, fontSize: 9, paddingBottom: 5, color: '#ffffff', marginLeft: 17 }}>Religiosa</Text>
+              <Text style={{ width: Metrics.screenWidth * 0.2, paddingLeft: 10, fontSize: 9,  color: '#ffffff'}}>
+                Localidad
+              </Text>
+              <Text style={{ width: Metrics.screenWidth * 0.3, paddingLeft: 10, fontSize: 9,  color: '#ffffff'}}>
+                SSSfajsfjaklsdjflaskjdf
+              </Text>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={{ paddingLeft: 5, fontSize: 9, paddingBottom: 5, color: '#ffffff', margin: 0 }}>Genero:</Text>
-              <Text style={{ paddingLeft: 5, fontSize: 9, paddingBottom: 5, color: '#ffffff', marginLeft: 16 }}>Santo Domingo</Text>
+              <Text style={{ width: Metrics.screenWidth * 0.2, paddingLeft: 10, fontSize: 9,  color: '#ffffff'}}>
+                Telefono
+              </Text>
+              <Text style={{ width: Metrics.screenWidth * 0.3, paddingLeft: 10, fontSize: 9,  color: '#ffffff'}}>
+                809-565-4567
+              </Text>
             </View>
           </View>
         </View>

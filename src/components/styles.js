@@ -7,7 +7,6 @@ export default StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 15,
   },
   forwardIconContainer: {
     flex: 1,

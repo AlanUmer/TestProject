@@ -3,8 +3,9 @@ import { Image, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 
 import { Styles, Images, Metrics, Colors } from '@theme/';
-import { setRadios, setLocations, setGenres } from '@actions/globals';
+
 import CommonWidgets from '@components/CommonWidgets';
+import { setRadios, setLocations, setGenres } from '@actions/globals';
 import Api from '@api';
 
 import Utils from '@src/utils';
@@ -22,7 +23,9 @@ class Splash extends Component {
   }
   async loadingData() {
     const topics = await Api.getInfo();
-    this.props.setGenres(topics.genres);
+    const newGenres = topics.genres.map(item => item.name);
+    console.log(newGenres);
+    this.props.setGenres(newGenres);
     this.props.setLocations(topics.locations);
     console.log('topics', topics);
     const radios = await Api.getNameSearch('d');

@@ -1,26 +1,31 @@
 import React, { Component } from 'react';
-import { Image, Text, View, TextInput, FlatList, ActivityIndicator } from 'react-native';
+import { Image, Text, View, TextInput, TouchableOpacity,  FlatList, ActivityIndicator } from 'react-native';
 import NavigationBar from 'react-native-navbar';
 import { connect } from 'react-redux';
+import ModalDropdown from 'react-native-modal-dropdown';
 import { SearchBar, CheckBox } from 'react-native-elements';
+
 import { Styles, Images, Fonts, Metrics, Colors } from '@theme/';
 import CommonWidgets from '@components/CommonWidgets';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { setRadios } from '@actions/globals';
+import Api from '@api';
 
 import Utils from '@src/utils';
-import ModalDropdown from 'react-native-modal-dropdown';
-const DEMO_OPTIONS_1 = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6', 'option 7', 'option 8', 'option 9'];
+
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
-      loaded: false,
+      searchKeyword: '',
       loading: false,
       page: 0,
       refreshing: false,
-      comments: '',
+      searching: false,
     };
+  }
+  onSearchKeywordInputChange(keyword) {
+    this.setState({ searchKeyword: keyword });
   }
   renderHeader() {
     return null;
@@ -41,8 +46,19 @@ class Home extends Component {
   onUserPressed(item) {
     this.props.navigation.navigate('player', { id: item.id });
   }
+  async searchName() {
+    const radios = await Api.getNameSearch(this.state.searchKeyword);
+    this.props.setRadios(radios);
+  }
+  async searchLocation(index) {
+    const radios = await Api.getLocationSearch(this.props.globals.locations[index]);
+    this.props.setRadios(radios);
+  }
+  async searchGenre(index) {
+    const radios = await Api.getGenreSearch(this.props.globals.genres[index]);
+    this.props.setRadios(radios);
+  }
   render() {
-    console.log(this.props.globals.radios);
     return (
       <View style={{ flex: 1 }} >
         {CommonWidgets.renderStatusBar(Colors.headerColor)}
@@ -58,8 +74,12 @@ class Home extends Component {
               <SearchBar
                 containerStyle={{ flex: 1, backgroundColor: '#1f1f1f', borderTopWidth: 0, borderBottomWidth: 0 }}
                 inputStyle={[{ backgroundColor: '#9f9f9f', color: 'white' }]}
-                placeholder="Type Here..." />
-              <Icon name="search" size={25} color="white" style={{ marginTop: 15 }} />
+                placeholder="Type Here..."
+                onChangeText={this.onSearchKeywordInputChange.bind(this)} />
+              <TouchableOpacity onPress={() => this.searchName()}>
+                <Icon name="search" size={25} color="white" style={{ marginTop: 15 }} />
+              </TouchableOpacity>
+
             </View>
             <View style={{ flexDirection: 'row' }}>
               <ModalDropdown
@@ -67,6 +87,7 @@ class Home extends Component {
                 textStyle={{ color: 'white' }}
                 showsVerticalScrollIndicator
                 defaultValue={'Select Location'}
+                onSelect={(item) => this.searchLocation(item)}
                 renderRow={( item ) => CommonWidgets.renderMenuListItem(item)}
                 options={this.props.globals.locations} />
               <ModalDropdown
@@ -74,6 +95,7 @@ class Home extends Component {
                 textStyle={{ color: 'white' }}
                 showsVerticalScrollIndicator
                 defaultValue={'Select Genre'}
+                onSelect={(item) => this.searchGenre(item)}
                 renderRow={(item) => CommonWidgets.renderMenuListItem(item)}
                 options={this.props.globals.genres} />
             </View>
@@ -104,6 +126,7 @@ class Home extends Component {
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    setRadios: radios => dispatch(setRadios(radios)),
   };
 }
 function mapStateToProps(state) {

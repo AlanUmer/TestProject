@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, DeviceEventEmitter, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { Text, View, Image, DeviceEventEmitter, TouchableOpacity, ActivityIndicator } from 'react-native';
 import NavigationBar from 'react-native-navbar';
 import { connect } from 'react-redux';
 import { SliderVolumeController } from 'react-native-volume-controller';
@@ -11,8 +11,8 @@ import Api from '@api';
 
 import Utils from '@src/utils';
 import Global from '@src/global';
-// import ModalDropdown from 'react-native-modal-dropdown';
-// const DEMO_OPTIONS_1 = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6', 'option 7', 'option 8', 'option 9'];
+import ModalDropdown from 'react-native-modal-dropdown';
+const DEMO_OPTIONS_1 = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6', 'option 7', 'option 8', 'option 9'];
 // <ModalDropdown style={{ flex: 1, top: 32, left: 8 }} options={DEMO_OPTIONS_1} />
 
 
@@ -108,14 +108,36 @@ class Player extends Component {
           tintColor={Colors.brandSecondary}
           rightButton={CommonWidgets.renderNavBarRightButton(() => this.props.navigation.goBack())}
           leftButton={CommonWidgets.renderNavBarLeftButton()} />
-        <View style={[Styles.listContainer, { paddingTop: Metrics.defaultPadding, backgroundColor: 'darkgrey' }]}>
-          <TouchableOpacity onPress={this._onPress}>
-            <Text style={{ fontSize: 40, color: 'white', alignSelf: 'center' }}>Player Button</Text>
-          </TouchableOpacity>
-          {icon}
-          <View style={[Styles.center, { flex: 1 }]}>
+         <View style={[Styles.listContainer]}>
+          <View style={{  width: Metrics.screenWidth, height: 100, backgroundColor: '#1f1f1f'}}>
             <SliderVolumeController />
+            <TouchableOpacity onPress={this._onPress}>
+              <Text style={{ fontSize: 40, color: 'white', alignSelf: 'center' }}>Player Button</Text>
+            </TouchableOpacity>  
           </View>
+          <Image
+            style={{ flex: 1,  width: null, height: null, padding: 30 }}
+            resizeMode={'stretch'}
+            source={Images.background}>
+            
+            <View style={{ flex: 1, backgroundColor: '#1f1f1f' }}>
+              <Text>Title</Text>
+              <ModalDropdown style={{ flex: 1, top: 32, left: 8 }} options={DEMO_OPTIONS_1} />
+              <View>
+                <Text>Title</Text>
+                <Image
+                  style={{ width: 100, height: 70, paddingTop: 15 }}
+                  resizeMode={'stretch'}
+                  source={Images.background} />
+              </View>
+              <View>
+                <Text>Titleafasdfasdfasdfasdf</Text>
+                
+              </View>
+            </View>
+            
+          </Image>
+          
         </View>
       </View>
     );

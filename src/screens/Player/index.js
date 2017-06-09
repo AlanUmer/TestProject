@@ -71,7 +71,6 @@ class Player extends Component {
 
   async loadingDetailData(id) {
     const detail = await Api.getDetail(id);
-    console.log(detail);
     this.props.setDetail(detail);
     ReactNativeAudioStreaming.play(detail.channels[0].stream.url, { showIniOSMediaCenter: true, showInAndroidNotifications: true });
   }

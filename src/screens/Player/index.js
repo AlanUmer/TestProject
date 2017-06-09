@@ -3,20 +3,17 @@ import { Text, View, Image, DeviceEventEmitter, TouchableOpacity, ActivityIndica
 import NavigationBar from 'react-native-navbar';
 import { connect } from 'react-redux';
 import { SliderVolumeController } from 'react-native-volume-controller';
+import ModalDropdown from 'react-native-modal-dropdown';
+import { ReactNativeAudioStreaming } from 'react-native-audio-streaming';
+
 import { setDetail, setPlayerStatus } from '@actions/globals';
 
 import { Styles, Images, Metrics, Colors } from '@theme/';
 import CommonWidgets from '@components/CommonWidgets';
 import Api from '@api';
-
-import Utils from '@src/utils';
 import Global from '@src/global';
-import ModalDropdown from 'react-native-modal-dropdown';
+
 const DEMO_OPTIONS_1 = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6', 'option 7', 'option 8', 'option 9'];
-// <ModalDropdown style={{ flex: 1, top: 32, left: 8 }} options={DEMO_OPTIONS_1} />
-
-
-import { ReactNativeAudioStreaming } from 'react-native-audio-streaming';
 
 class Player extends Component {
   constructor(props) {
@@ -31,6 +28,7 @@ class Player extends Component {
     const { params } = this.props.navigation.state;
     this.loadingDetailData(params.id);
   }
+
   componentDidMount() {
     this.subscription = DeviceEventEmitter.addListener(
       'AudioBridgeEvent', (evt) => {
@@ -61,7 +59,9 @@ class Player extends Component {
         break;
       case Global.STOPPED:
       case Global.ERROR:
-        ReactNativeAudioStreaming.play('http://lacavewebradio.chickenkiller.com:8000/stream.mp3', { showIniOSMediaCenter: true, showInAndroidNotifications: true });
+        ReactNativeAudioStreaming.play(this.props.globals.detail === null ? ''
+        : this.props.globals.detail.channels[0].stream.url,
+         { showIniOSMediaCenter: true, showInAndroidNotifications: true });
         break;
       case Global.BUFFERING:
         ReactNativeAudioStreaming.stop();
@@ -71,8 +71,9 @@ class Player extends Component {
 
   async loadingDetailData(id) {
     const detail = await Api.getDetail(id);
+    console.log(detail);
     this.props.setDetail(detail);
-    ReactNativeAudioStreaming.play('http://lacavewebradio.chickenkiller.com:8000/stream.mp3', { showIniOSMediaCenter: true, showInAndroidNotifications: true });
+    ReactNativeAudioStreaming.play(detail.channels[0].stream.url, { showIniOSMediaCenter: true, showInAndroidNotifications: true });
   }
   onUserPressed() {
     this.props.navigation.goBack();
@@ -120,7 +121,7 @@ class Player extends Component {
             <TouchableOpacity onPress={this._onPress}>
               {playerButton}
             </TouchableOpacity>
-            <Text style={{ fontSize: 10, color: 'white' }}>Ellge Localldad</Text>
+            <Text style={{ fontSize: 10, color: 'white' }}>{this.props.globals.detail === null ? '' : this.props.globals.detail.name}</Text>
           </View>
           <Image
             style={{ flex: 1, width: null, height: null, padding: 30 }}
@@ -137,14 +138,14 @@ class Player extends Component {
                 renderRow={item => CommonWidgets.renderMenuListItem(item)}
                 options={DEMO_OPTIONS_1} />
               <View style={{ alignItems: 'center', borderBottomWidth: 0.5, marginTop: 20, borderColor: 'white' }}>
-                <Text style={{ fontSize: 18, color: 'white' }}>Ellge Localldad</Text>
+                <Text style={{ fontSize: 18, color: 'white' }}>{this.props.globals.detail === null ? '' : this.props.globals.detail.name}</Text>
                 <Image
                   style={{ width: 120, height: 90, paddingTop: 15, margin: 10 }}
                   resizeMode={'stretch'}
-                  source={Images.test} />
+                  source={{ src: this.props.globals.detail === null ? '' : this.props.globals.detail.logo }} />
               </View>
               <View style={{ }}>
-                <Text style={{ color: 'white', marginTop: 30 }}>Titleafasdfasdfasdfasdasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdff</Text>
+                <Text style={{ color: 'white', marginTop: 30 }}>{ this.props.globals.detail === null ? '' : this.props.globals.detail.description}</Text>
               </View>
             </View>
 
